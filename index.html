@@ -7,7 +7,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 
-    <!-- Google Fonts — Courier Prime for terminal feel, DM Sans for UI -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap"
@@ -16,15 +15,15 @@
 
     <style>
       :root {
-        --bg: #0d0f14; /* near-black background */
-        --surface: #151820; /* card / panel background */
-        --surface2: #1c2030; /* slightly lighter surface */
-        --border: #2a2f45; /* subtle border */
-        --accent: #f0b429; /* amber — primary accent */
-        --accent2: #3ecfcf; /* teal — secondary accent */
-        --accent3: #e05c6a; /* coral — danger / highlight */
-        --text: #d4daf0; /* primary text */
-        --text-dim: #6b748f; /* muted text */
+        --bg: #0d0f14;
+        --surface: #151820;
+        --surface2: #1c2030;
+        --border: #2a2f45;
+        --accent: #f0b429;
+        --accent2: #3ecfcf;
+        --accent3: #e05c6a;
+        --text: #d4daf0;
+        --text-dim: #6b748f;
         --mono: "Courier Prime", monospace;
         --sans: "DM Sans", sans-serif;
         --radius: 6px;
@@ -46,6 +45,7 @@
         color: var(--text);
         min-height: 100vh;
         padding: 0 0 80px;
+
         background-image: repeating-linear-gradient(
           0deg,
           transparent,
@@ -65,7 +65,43 @@
         position: sticky;
         top: 0;
         z-index: 100;
-        animation: pulse 4s infinite ease-in-out;
+        box-shadow: var(--glow);
+      }
+
+      .header-left h1 {
+        font-family: var(--mono);
+        font-size: 1.3rem;
+        color: var(--accent);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .header-left p {
+        font-size: 0.78rem;
+        color: var(--text-dim);
+        margin-top: 2px;
+        font-family: var(--mono);
+      }
+
+      .git-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 8px 14px;
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        color: var(--accent2);
+      }
+
+      .git-badge .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent2);
+        animation: pulse 2s infinite;
       }
 
       @keyframes pulse {
@@ -251,26 +287,28 @@
         border-bottom: 1px solid transparent;
       }
 
-      .dataset-desc-inline {
+      .table-hint {
+        color: var(--text-dim);
+        font-size: 0.75rem;
         font-weight: 400;
       }
 
-      .hidden {
-        display: none;
-      }
-
-      .todo-callout.s2 {
+      .todo-s2 {
         border-left-color: var(--accent2);
         color: var(--accent2);
         background: rgba(62, 207, 207, 0.06);
         border-color: rgba(62, 207, 207, 0.25);
       }
 
-      .todo-callout.s3 {
+      .todo-s3 {
         border-left-color: var(--accent3);
         color: var(--accent3);
         background: rgba(224, 92, 106, 0.06);
         border-color: rgba(224, 92, 106, 0.25);
+      }
+
+      .hidden-chart {
+        display: none;
       }
 
       .dataset-collapse > summary::-webkit-details-marker {
@@ -673,9 +711,7 @@
           <summary>
             <span
               >Data table
-              <span class="dataset-desc-inline"
-                >(click to show or hide)</span
-              ></span
+              <span class="table-hint">(click to show or hide)</span></span
             >
             <span class="dataset-collapse__chev" aria-hidden="true">▶</span>
           </summary>
@@ -736,7 +772,7 @@
           <span class="owner-tag tag-s2">Student 2 · Collaborator</span>
         </div>
 
-        <div class="todo-callout s2">
+        <div class="todo-callout todo-s2">
           <strong>✓ Complete — Student 2</strong>
           <code>initCharts()</code> runs from <code>onDataReady()</code> when
           <code>window.DS</code> has rows. <code>drawBarChart</code> (study-hour
@@ -753,7 +789,7 @@
               <span>📊</span>
               Chart appears when the CSV data is ready.
             </div>
-            <canvas id="barChart" class="hidden"></canvas>
+            <canvas id="barChart" class="hidden-chart"></canvas>
           </div>
 
           <div class="chart-box">
@@ -762,7 +798,7 @@
               <span>🔵</span>
               Chart appears when the CSV data is ready.
             </div>
-            <canvas id="scatterChart" class="hidden"></canvas>
+            <canvas id="scatterChart" class="hidden-chart"></canvas>
           </div>
 
           <div class="chart-box">
@@ -771,7 +807,7 @@
               <span>📈</span>
               Chart appears when the CSV data is ready.
             </div>
-            <canvas id="histChart" class="hidden"></canvas>
+            <canvas id="histChart" class="hidden-chart"></canvas>
           </div>
 
           <div class="chart-box">
@@ -780,7 +816,7 @@
               <span>🍕</span>
               Chart appears when the CSV data is ready.
             </div>
-            <canvas id="pieChart" class="hidden"></canvas>
+            <canvas id="pieChart" class="hidden-chart"></canvas>
           </div>
         </div>
       </section>
@@ -791,7 +827,7 @@
           <span class="owner-tag tag-s3">Student 3 · Collaborator</span>
         </div>
 
-        <div class="todo-callout s3">
+        <div class="todo-callout todo-s3">
           <strong>✓ Complete — Student 3</strong>
           The statistical functions below compute descriptive statistics,
           correlation, and linear regression, then
